@@ -1,0 +1,41 @@
+grep -irn "search content" .
+
+Flags
+
+-i  //Ignore case
+-r  //If . Recursively so it looks for present directory and so on and so forth
+    //If *.* given , need to specify the type of file to look into, could be *.* *.filetype tc., in the current directory
+-n //Displays the line # along with line, where the search string present
+-l //displays only the file name not the searched content line
+
+
+-v // Inverts the search and displays all the lines where the "search context" is   not there . Usually comes handy while chaining of commands
+-o // only matching, means instead of displaying the entire line it displays only the search content in the line
+
+Xargs:
+
+The xargs command  is used to build and execute command lines from standard input. It takes input from a pipeline or a file, and for each line of input, it executes a specified command.
+
+It takes input from the chained command replacing -I {}
+
+
+cat sc-1.html | grep -o " [a-z\-]*\.js\:[0-9]*" | xargs -I {} grep {} target_file.txt
+
+//Xargs  command would get a input from previous command for each line of output to grep in target_file
+
+//The -I {} option tells xargs to replace every occurrence of {} in the command that follows with the input it receives from the previous command in the pipeline.
+//{} is place holder
+
+// So if the previous commands output has 3 lines, it would also insist the following xargs to execute grep or any other command 3 times
+1.txt
+2.txt
+3.txt
+then this would execute 3 commands as below
+grep <1.txt> target_file.txt
+grep <2.txt> target_file.txt
+grep <3.txt> target_file.txt
+
+
+
+
+ 

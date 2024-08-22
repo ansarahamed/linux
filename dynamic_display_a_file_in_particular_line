@@ -1,0 +1,5 @@
+
+3. Substitute line number and filename dynamically
+  line_number=2
+  file_name="file_name"
+  sed -n "$line_number{=;p;}' $file_name
